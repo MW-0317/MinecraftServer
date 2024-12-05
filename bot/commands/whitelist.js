@@ -3,7 +3,6 @@ var fs = require('fs');
 var https = require('https');
 const Rcon = require('modern-rcon');
 const rcon = new Rcon('mc', 'tina');
-// const { whitelistPath } = require('../config.json');
 
 async function getJsonFromUrl(url) {
     return new Promise((resolve) => {
