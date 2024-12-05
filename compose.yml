@@ -30,6 +30,8 @@ services:
       - ./spigot:/spigot
   whitelistbot:
     build: /bot
+    env_file:
+      - .env
     command: ["npm", "run", "bot"]
     depends_on:
       mc:
