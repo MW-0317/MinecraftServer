@@ -11,7 +11,7 @@ services:
       EULA: "TRUE"
       VERSION: ${VERSION}
       TYPE: CUSTOM
-      RCON_PASSWORD: "tina"
+      RCON_PASSWORD: ${RCON_PASSWORD}
       ENABLE_WHITELIST: "TRUE"
       CUSTOM_JAR_EXEC: "-jar /spigot/server.jar"
       PLUGINS: |
