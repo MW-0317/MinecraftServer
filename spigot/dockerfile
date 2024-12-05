@@ -1,0 +1,11 @@
+FROM alpine/curl:latest
+
+WORKDIR /buildtools
+
+ARG VERSION
+
+RUN apk add git
+RUN apk add openjdk21
+RUN curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar > out 2>error
+RUN export MAVEN_OPTS="-Xmx2G"
+RUN java -Xmx2G -jar BuildTools.jar --final-name server.jar --rev ${VERSION}

@@ -1,0 +1,3 @@
+https://modrinth.com/plugin/keepinventory-individual
+https://modrinth.com/plugin/simple-voice-chat
+https://modrinth.com/plugin/dynmap

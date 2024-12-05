@@ -1,0 +1,16 @@
+{
+  "name": "whitelistbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commands": "node deploy-commands.js",
+    "bot": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "modern-rcon": "^1.0.3"
+  }
+}
