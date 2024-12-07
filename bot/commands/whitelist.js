@@ -4,6 +4,22 @@ var https = require('https');
 const Rcon = require('modern-rcon');
 const rcon = new Rcon('mc', 'tina');
 
+async function getPlaintextFromUrl(url) {
+    return new Promise((resolve) => {
+        https.get(url, response => {
+            let body = "";
+
+            response.on("data", (chunk) => {
+                body += chunk;
+            });
+
+            response.on("end", () => {
+                resolve(body);
+            });
+        });
+    });
+}
+
 async function getJsonFromUrl(url) {
     return new Promise((resolve) => {
         https.get(url, response => {
@@ -19,7 +35,7 @@ async function getJsonFromUrl(url) {
                     json = JSON.parse(body);
                 }
                 catch (err) {
-                    console.error(error.message);
+                    console.error(err.message);
                 }
                 resolve(json);
             });
@@ -37,8 +53,23 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction) {
         var name = interaction.options.getString('name');
-        let image_bytes_str = (await getJsonFromUrl(`https://minecraft-api.com/api/skins/${name}/full/10.5/10/json`))["skin"];
-        let uuid = (await getJsonFromUrl(`https://minecraft-api.com/api/uuid/${name}/json`))['uuid']
+        let image_bytes_str;
+        let uuid;
+        try {
+            image_bytes_str = (await getJsonFromUrl(`https://minecraft-api.com/api/skins/${name}/full/10.5/10/json`))["skin"];
+
+            uuid = await getPlaintextFromUrl(`https://minecraft-api.com/api/uuid/${name}`);
+            if (uuid == "Player not found !") {
+                interaction.reply({content:uuid});
+                return;
+            }
+
+
+        } catch (e) {
+            await interaction.reply({content:e});
+            return
+        }
+        
         let image_bytes = Buffer.from(image_bytes_str, "base64");
         let attachment = new AttachmentBuilder(image_bytes).setName(`${name}.png`);
         console.log(attachment.name);

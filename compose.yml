@@ -14,8 +14,8 @@ services:
       RCON_PASSWORD: ${RCON_PASSWORD}
       ENABLE_WHITELIST: "TRUE"
       CUSTOM_JAR_EXEC: "-jar /spigot/server.jar"
+      # SPIGET_RESOURCES: 114095 #,83557
       PLUGINS: |
-        https://cdn.modrinth.com/data/1QZbMb72/versions/FcgboFDT/Keep-Inv-Individual-1.4.3.jar
         https://cdn.modrinth.com/data/9eGKb6K1/versions/tA5pALYl/voicechat-bukkit-2.5.25.jar
     healthcheck:
       test: mc-health
@@ -43,7 +43,7 @@ services:
         - VERSION=${VERSION}
     env_file:
       - .env
-    command: sh -c "cp /buildtools/server.jar /spigot/server.jar && tail -F /spigot/server.jar"
+    command: sh -c "cp /buildtools/server.jar /spigot/server.jar && sleep 10"
     healthcheck:
       test: sh -c "[ -f /spigot/server.jar ]"
       interval: 5s
