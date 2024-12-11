@@ -14,10 +14,18 @@ services:
       RCON_PASSWORD: ${RCON_PASSWORD}
       ENABLE_WHITELIST: "TRUE"
       CUSTOM_JAR_EXEC: "-jar /spigot/server.jar"
-      SPIGET_RESOURCES: 114095,83557,82342,4341
+      SPIGET_RESOURCES: 114095,83557,82342,4341,106031,81534,83767
       PLUGINS: |
         https://cdn.modrinth.com/data/9eGKb6K1/versions/KuMfGuTv/voicechat-bukkit-2.5.26.jar
-        https://cdn.modrinth.com/data/wsr1TOgJ/versions/LHXCQKlb/mapify-1.5.jar
+      VANILLATWEAKS_SHARECODE: 1vUcRy
+      DATAPACKS: /datapacks
+      INITIAL_ENABLED_PACKS: vanilla,minecart_improvements
+      MEMORY: ${MEMORY}
+      SEED: 4162146581515783012
+      WHITELIST: |
+        Mikro0317
+      OPS: |
+        Mikro0317
     healthcheck:
       test: mc-health
       start_period: 1m
@@ -29,6 +37,7 @@ services:
     volumes:
       - ./data:/data
       - ./spigot:/spigot
+      - ./resources/datapacks:/datapacks
   whitelistbot:
     build: /bot
     env_file:

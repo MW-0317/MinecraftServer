@@ -116,6 +116,7 @@ module.exports = {
 
                 // If server up
                 rcon.connect().then(() => {
+                        console.log(`whitelist add ${name}`);
                         return rcon.send(`whitelist add ${name}`);
                     }
                 ).then(res => {
